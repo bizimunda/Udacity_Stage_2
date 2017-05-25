@@ -1,0 +1,62 @@
+private void runBackground()
+    {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                new Background().execute("https://api.themoviedb.org/3/movie/"+id+"?api_key=89f8031fa012853efc9498472830528d&append_to_response=videos");
+            }
+        });
+    }
+
+class Background extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected String doInBackground(String... strings) {
+            return readURL(strings[0]);
+        }
+
+        @Override
+        protected void onPostExecute(String content) {
+
+            try {
+                JSONObject jsonObject = new JSONObject(content);
+                JSONObject videosObject = jsonObject.getJSONObject("videos");
+                JSONArray resultsArray = videosObject.getJSONArray("results");
+
+                String complete_url = "";
+                for (int i = 0; i < resultsArray.length(); i++) {
+                    JSONObject resultObject = resultsArray.getJSONObject(i);
+                    String key = resultObject.getString("key");
+                    if(key!=null)
+                    {
+                        complete_url = "https://www.youtube.com/watch?v=" + key;
+                        arrayList.add(complete_url);
+                    } else {
+                        arrayList.add("No Preview");
+                    }
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+    private static String readURL(String theUrl) {
+        StringBuilder content = new StringBuilder();
+        try {
+            URL url = new URL(theUrl);
+
+            URLConnection urlConnection = url.openConnection();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                content.append(line + "\n");
+            }
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return content.toString();
+    }

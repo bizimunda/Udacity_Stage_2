@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Stage 2</string>
+    <string name="movie_title">Movie title</string>
+    <string name="most_popular">Pop</string>
+    <string name="top_rated">Rated</string>
+    <string name="fav">Fav</string>
+    <string name="un_fav">Un Fav</string>
+</resources>

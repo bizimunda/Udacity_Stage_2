@@ -1,0 +1,26 @@
+[
+    {
+        "outputFile": "C:\\Users\\hamid\\AAA\\Udacity Stage 2-20170518T184236Z-001\\Udacity Stage 2\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 45,
+                    "endOffset": 96
+                },
+                "from": {
+                    "file": "C:\\Users\\hamid\\.android\\build-cache\\78d72be063b4ff98ba1a5f006a18a8c36c3b6416\\output\\res\\values\\values.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 229,
+                        "endColumn": 45,
+                        "endOffset": 270
+                    }
+                }
+            }
+        ]
+    }
+]
