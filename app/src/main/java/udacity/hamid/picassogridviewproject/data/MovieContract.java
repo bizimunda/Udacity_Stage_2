@@ -24,5 +24,7 @@ public class MovieContract {
         // "_ID" column in addition to the two below
         public static final String COLUMN_TITLE = "title";
         public static final String COLUMN_MOVIE_ID = "movie_id";
+        public static final String COLUMN_IMAGE = "image";
+        public static final String COLUMN_DESCRIPTION = "description";
     }
 }

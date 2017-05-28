@@ -1,5 +1,8 @@
 package udacity.hamid.picassogridviewproject;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import static android.R.attr.name;
 
 /**
@@ -7,7 +10,7 @@ import static android.R.attr.name;
  */
 
 public class
-Product {
+Product implements Parcelable {
 
     private String image;
     private String title;
@@ -24,15 +27,53 @@ Product {
         this.releaseDate = releaseDate;
         this.voteAvg = voteAvg;
         this.plotSynopsis = plotSynopsis;
-        this.id=id;
+        this.id = id;
 
     }
 
     public Product(String key) {
         this.key = key;
     }
-    public Product()
-    {}
+
+    public Product() {
+    }
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(image);
+        dest.writeString(title);
+        dest.writeString(releaseDate);
+        dest.writeString(voteAvg);
+        dest.writeString(plotSynopsis);
+        dest.writeString(key);
+        dest.writeInt(id);
+    }
+
+    protected Product(Parcel in) {
+        image = in.readString();
+        title = in.readString();
+        releaseDate = in.readString();
+        voteAvg = in.readString();
+        plotSynopsis = in.readString();
+        id = in.readInt();
+        key = in.readString();
+    }
+
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
+        @Override
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
+        }
+
+        @Override
+        public Product[] newArray(int size) {
+            return new Product[size];
+        }
+    };
 
     public String getKey() {
         return key;
@@ -89,5 +130,6 @@ Product {
     public void setId(int id) {
         this.id = id;
     }
+
 
 }

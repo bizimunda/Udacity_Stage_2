@@ -48,12 +48,14 @@ public class DetailActivity extends AppCompatActivity{
 
     private ImageView imageView;
     private TextView tvTitle, tvReleaseDate, tvVoteAvg, tvPlotSynopsis;
-    String title;
+    String title, plotSynopsis, image;
     int id;
     StringBuffer content ;
     ArrayList<String>trailers_list ;
     ListView listView ;
     TextView review;
+    Uri imageUri;
+
 
 
     @Override
@@ -73,12 +75,12 @@ public class DetailActivity extends AppCompatActivity{
 
         final Intent intent = getIntent();
         if (intent.getExtras()!=null) {
-            String image = intent.getStringExtra("k_image");
-            Uri imageUri=Uri.parse(image);
+            image = intent.getStringExtra("k_image");
+            imageUri=Uri.parse(image);
             title = intent.getStringExtra("k_title");
             String releaseDate = intent.getStringExtra("k_releaseDate");
             String voteAvg = intent.getStringExtra("k_voteAvg");
-            String plotSynopsis = intent.getStringExtra("k_plotSynopsis");
+             plotSynopsis = intent.getStringExtra("k_plotSynopsis");
             id=intent.getIntExtra("k_id", 0);
 
 
@@ -113,8 +115,10 @@ public class DetailActivity extends AppCompatActivity{
     {
 
         ContentValues contentValues = new ContentValues();
+        contentValues.put(MovieEntry.COLUMN_IMAGE, imageUri.toString());
         contentValues.put(MovieEntry.COLUMN_TITLE, title);
         contentValues.put(MovieEntry.COLUMN_MOVIE_ID, id);
+        contentValues.put(MovieEntry.COLUMN_DESCRIPTION, plotSynopsis);
 
         Uri uri = getContentResolver().insert(MovieEntry.CONTENT_URI, contentValues);
         if(uri != null) {

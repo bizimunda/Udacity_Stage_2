@@ -3,6 +3,8 @@ package udacity.hamid.picassogridviewproject;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
+import android.os.Parcelable;
+import android.os.PersistableBundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
@@ -40,12 +42,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private GridView gridView;
     private CustomListAdapter adapter;
     private TextView tvPopularAndRated;
-    private Product mProduct;
-    private CustomCursorAdapter customCursorAdapter;
-    private RecyclerView recyclerView;
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int TASK_LOADER_ID = 0;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,6 +169,23 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         return content.toString();
     }
 
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if(savedInstanceState!=null){
+            arrayList = savedInstanceState.getParcelableArrayList("state");
+            adapter= new CustomListAdapter(MainActivity.this, R.layout.custom_list_layout, arrayList );
+            gridView.setAdapter(adapter);
+
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList("state", arrayList);
+        super.onSaveInstanceState(outState);
+
+    }
 
     //Override methods of loaders
     @Override

@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import org.w3c.dom.Text;
 
 import udacity.hamid.picassogridviewproject.data.MovieContract;
@@ -38,15 +40,23 @@ public class CustomCursorAdapter extends RecyclerView.Adapter<CustomCursorAdapte
         int idIndex = mCursor.getColumnIndex(MovieContract.MovieEntry._ID);
         int titleIndex = mCursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_TITLE);
         int movieIdIndex = mCursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_MOVIE_ID);
+        int descriptionIndex = mCursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_DESCRIPTION);
+        int imageIndex = mCursor.getColumnIndex(MovieContract.MovieEntry.COLUMN_IMAGE);
 
         mCursor.moveToPosition(position); // get to the right location in the cursor
         final int id = mCursor.getInt(idIndex);
         String title = mCursor.getString(titleIndex);
+        String description = mCursor.getString(descriptionIndex);
+        String image = mCursor.getString(imageIndex);
         int movieId = mCursor.getInt(movieIdIndex);
 
         //Set values
         holder.itemView.setTag(id);
         holder.textViewTitle.setText(title);
+        holder.textViewDescription.setText(description);
+        Picasso.with(mContext)
+                .load(image)
+                .into(holder.imageView);
 
         String movieIdString = "" + movieId; // converts int to String
         holder.textViewId.setText(movieIdString);
@@ -80,6 +90,8 @@ public class CustomCursorAdapter extends RecyclerView.Adapter<CustomCursorAdapte
         ImageView imageView;
         TextView textViewId;
         TextView textViewTitle;
+        TextView textViewDescription;
+
 
         public TaskViewHolder(View itemView) {
             super(itemView);
@@ -87,6 +99,7 @@ public class CustomCursorAdapter extends RecyclerView.Adapter<CustomCursorAdapte
             imageView=(ImageView)itemView.findViewById(R.id.imageViewProduct);
             textViewId=(TextView)itemView.findViewById(R.id.custom_tvId);
             textViewTitle=(TextView)itemView.findViewById(R.id.custom_tvTitle);
+            textViewDescription=(TextView)itemView.findViewById(R.id.custom_tvDescription);
 
         }
     }
