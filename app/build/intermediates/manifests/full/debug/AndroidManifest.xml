@@ -16,21 +16,27 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="udacity.hamid.picassogridviewproject.MainActivity" >
+        <activity
+            android:name="udacity.hamid.picassogridviewproject.MainActivity"
+            android:configChanges="orientation|screenSize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="udacity.hamid.picassogridviewproject.DetailActivity" />
+        <activity
+            android:name="udacity.hamid.picassogridviewproject.DetailActivity"
+            android:configChanges="orientation|screenSize" />
 
         <provider
             android:name="udacity.hamid.picassogridviewproject.data.MovieContentProvider"
             android:authorities="udacity.hamid.picassogridviewproject"
             android:exported="false" />
 
-        <activity android:name="udacity.hamid.picassogridviewproject.FavActivity" />
+        <activity
+            android:name="udacity.hamid.picassogridviewproject.FavActivity"
+            android:configChanges="orientation|screenSize" />
     </application>
 
 </manifest>

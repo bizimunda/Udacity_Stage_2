@@ -83,8 +83,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="Release date"
+                android:text="Description"
                 android:textSize="20sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/tvReviews"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#f5efef"
+                android:background="#111"
+                android:paddingLeft="2dp"
+                android:text="Film Reviews"
+                android:textSize="20sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/darker_gray" />
 
             <TextView
                 android:id="@+id/review"
@@ -92,8 +111,26 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="Review"
-                android:textColor="#bc3737"
+                android:textColor="#172dce"
                 android:textSize="20sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/darker_gray" />
+
+            <TextView
+                android:id="@+id/tvVideoTrailers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#f5efef"
+                android:background="#111"
+                android:paddingLeft="2dp"
+                android:text="Video trailers"
+                android:textSize="20sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@android:color/darker_gray" />
 
             <ListView
                 android:id="@+id/lv_trailer"

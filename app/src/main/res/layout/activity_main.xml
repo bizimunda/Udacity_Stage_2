@@ -2,27 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="udacity.hamid.picassogridviewproject.MainActivity">
 
+
     <TextView
+        android:id="@+id/tv_popular_and_topRated"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:id="@+id/tv_popular_and_topRated"
         android:layout_gravity="center"
-        />
+        android:textSize="20sp" />
 
     <GridView
         android:id="@+id/gridView"
-        android:stretchMode="columnWidth"
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:numColumns="auto_fit"
-        ></GridView>
+        android:stretchMode="columnWidth"></GridView>
 
 
 </LinearLayout>

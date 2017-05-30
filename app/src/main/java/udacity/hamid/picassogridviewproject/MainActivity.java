@@ -36,7 +36,7 @@ import java.util.ArrayList;
 import udacity.hamid.picassogridviewproject.data.MovieContract;
 
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Product> arrayList;
     private GridView gridView;
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int TASK_LOADER_ID = 0;
-
+    int index;
 
 
     @Override
@@ -61,7 +61,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-
 
                 Product product = (Product) gridView.getItemAtPosition(position);
                 String image = product.getImage().toString();
@@ -83,8 +82,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
             }
         });
-        getSupportLoaderManager().initLoader(TASK_LOADER_ID, null, this);
-
     }
 
     private void topRated() {
@@ -148,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         adapter = new CustomListAdapter
                 (MainActivity.this, R.layout.custom_list_layout, arrayList);
         gridView.setAdapter(adapter);
+
     }
 
     private static String readURL(String theUrl) {
@@ -170,91 +168,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        if(savedInstanceState!=null){
-            arrayList = savedInstanceState.getParcelableArrayList("state");
-            adapter= new CustomListAdapter(MainActivity.this, R.layout.custom_list_layout, arrayList );
-            gridView.setAdapter(adapter);
-
-        }
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        outState.putParcelableArrayList("state", arrayList);
-        super.onSaveInstanceState(outState);
-
-    }
-
-    //Override methods of loaders
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new AsyncTaskLoader<Cursor>(this) {
-
-            // Initialize a Cursor, this will hold all the movies
-            Cursor mTaskData = null;
-
-            // onStartLoading() is called when a loader first starts loading data
-            @Override
-            protected void onStartLoading() {
-                if (mTaskData != null) {
-                    // Delivers any previously loaded data immediately
-                    deliverResult(mTaskData);
-                } else {
-                    // Force a new load
-                    forceLoad();
-                }
-            }
-
-            // loadInBackground() performs asynchronous loading of data
-            @Override
-            public Cursor loadInBackground() {
-                // Will implement to load data
-
-                // COMPLETED (5) Query and load all task data in the background; sort by priority
-                // [Hint] use a try/catch block to catch any errors in loading data
-
-                try {
-                    return getContentResolver().query(MovieContract.MovieEntry.CONTENT_URI,
-                            null,
-                            null,
-                            null,
-                            MovieContract.MovieEntry.COLUMN_MOVIE_ID);
-
-                } catch (Exception e) {
-                    Log.e(TAG, "Failed to asynchronously load data.");
-                    e.printStackTrace();
-                    return null;
-                }
-            }
-
-            // deliverResult sends the result of the load, a Cursor, to the registered listener
-            public void deliverResult(Cursor data) {
-                mTaskData = data;
-                super.deliverResult(data);
-            }
-        };
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        adapter.swapCursor(data);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        adapter.swapCursor(null);
-    }
-
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-        getSupportLoaderManager().restartLoader(TASK_LOADER_ID, null, this);
-
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
@@ -274,7 +187,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
         if (id == R.id.action_fav) {
 
-            Intent launchFavIntent= new Intent(this, FavActivity.class);
+            Intent launchFavIntent = new Intent(this, FavActivity.class);
             startActivity(launchFavIntent);
         }
         return super.onOptionsItemSelected(item);

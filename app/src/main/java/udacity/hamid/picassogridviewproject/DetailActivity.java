@@ -56,8 +56,6 @@ public class DetailActivity extends AppCompatActivity{
     TextView review;
     Uri imageUri;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,8 +80,6 @@ public class DetailActivity extends AppCompatActivity{
             String voteAvg = intent.getStringExtra("k_voteAvg");
              plotSynopsis = intent.getStringExtra("k_plotSynopsis");
             id=intent.getIntExtra("k_id", 0);
-
-
 
             //setting views
             Picasso.with(DetailActivity.this).load(imageUri).into(imageView);
@@ -243,7 +239,7 @@ public class DetailActivity extends AppCompatActivity{
             ArrayList<String> arrayObject= new ArrayList<String>();
             for (int i=0; i<trailers_list.size();i++)
             {
-                arrayObject.add("Trailer: "+(i+1));
+                arrayObject.add("Trailer: "+ i);
             }
             ArrayAdapter<String> itemsAdapter =
                     new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, arrayObject);
